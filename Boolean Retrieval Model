@@ -1,0 +1,141 @@
+Neural Information Retrieval: A Literature Review" by Xuanang Wang, et al. This paper provides a comprehensive review of the state-of-the-art in NeuIR, including various neural network architectures, training methods, and evaluation metrics. It also discusses the challenges and future directions of NeuIR research.
+
+"Neural Information Retrieval with Cross-Attention and Self-Attention" by Zhuyun Dai, et al. This paper proposes a novel neural network architecture for NeuIR that uses both cross-attention and self-attention mechanisms. The authors demonstrate the effectiveness of their approach on several benchmark datasets.
+
+"Deep Learning for Matching in Search and Recommendation" by Haibin Liu, et al. This tutorial covers the use of deep learning techniques for matching in search and recommendation systems, including the use of neural networks for query and document representation, as well as for ranking.
+
+"Learning to Rank for Information Retrieval using Neural Networks" by Hamed Zamani, et al. This tutorial covers the use of neural networks for learning to rank, which is a common task in IR. The authors provide an overview of different neural network architectures for learning to rank, as well as techniques for training and evaluating these models.
+
+"Neural Information Retrieval: Models and Applications" by Jinfeng Rao, et al. This tutorial covers the basics of NeuIR, including various neural network architectures for IR tasks such as document retrieval, question answering, and recommendation. The authors also discuss the challenges and future directions of NeuIR research.
+
+第六章 域加权评分
+i=1lgisi
+
+词项频率--tft,d，t-词项 ，d-文档
+
+文档集频率---cf：词项在文档集频率
+
+文档频率:出现t的所有文档的数目
+逆文档频率：
+idft=lgNdft
+tf-idft,d=tft,didft\
+
+链式法则
+P(AB)=P(A∩B)=P(A|B)P(B)=P(B|A)P(A)
+
+scikit-learn的内置函数CountVectorizer来实现计算每个术语（或词）在每个文档（或文件）中出现的次数（或布尔版本）
+CountVectorizer(max_features)
+
+  最大特征
+CountVectorizer 将选择出现频率最高的单词/特征/术语。它采用绝对值，因此如果您设置“max_features = 3”，它将选择数据中最常见的 3 个词。
+
+可以使用Decompose(分离)分别存储字符(U+0043)本身和音调(U+0327)本身
+unicodedata.normalize("NFKD", text): Normal form Decomposition: 将所有的文本标准化为 Decompose 形式
+
+
+"".join  
+ [“bere”,”gerg ”,”ger”]    beregergger
+>>> text = "JGood is a handsome boy, he is cool, clever, and so on..."
+>>> print re.sub(r'\s+', '-', text)
+JGood-is-a-handsome-boy,-he-is-cool,-clever,-and-so-on...
+把“ r'\s+' ” 替换为“ r'is\s+'”  结果是把原句中的is改为了-
+>>> text = "JGood is a handsome boy, he is cool, clever, and so on..."
+
+>>> print re.sub(r'is\s+', '-', text)
+JGood -a handsome boy, he -cool, clever, and so on..
+
+strip_accents
+
+strip_accents    默认为None，可设为ascii或unicode，将使用ascii或unicode编码在预处理步骤去除raw document中的重音符号
+
+re.compile
+>>> import re
+>>> some_text = 'a,b,,,,c d'
+>>> reObj = re.compile('[, ]+')
+>>> reObj.split(some_text)
+['a', 'b', 'c', 'd']
+
+
+
+默认分词器
+nltk.word_tokenize
+分词
+sentence = "The brown fox wasn't that quick and he couldn't win the race"
+# default word tokenizer
+default_wt = nltk.word_tokenize
+words = default_wt(sentence)
+print(words)
+
+
+
+enumerate
+函数用于遍历一个可遍历的数据对象(如列表、元组或字符串等)的索引和其对应的元素，一般用于for循环中
+a='ostbdn'
+print (list(enumerate(a)))
+[(0,’o),(1,’s),(2,’t’),(3,’b’),(4,’d’),(5,’n)]]
+
+
+
+In [1]: kwargs = {'name': 'Lilei'}
+
+In [2]: item = kwargs.setdefault('name', 'zhangsan')
+#取到对应的键值 item-->Lilei
+In [3]: item
+Out[3]: 'Lilei'
+
+In [4]: kwargs
+Out[4]: {'name': 'Lilei'}
+
+In [5]: new = kwargs.setdefault('info', {})
+#没有对应的键 item-->default-->{}
+In [6]: new
+Out[6]: {}
+
+In [7]: kwargs
+Out[7]: {'info': {}, 'name': 'Lilei'}
+In [8]: new.setdefault('score', '90')
+Out[8]: '90'
+
+tqdm模块
+可以在python执行长循环时在命令行界面实时地显示一个进度提示信息，包括执行进度、处理速度等信息，且可在一定程度上进行定制。
+
+
+用到os.path.basename(),返回path最后的文件名。若path以/或\结尾，那么就会返回空值。
+eg:
+
+path='D:\CSDN'
+os.path.basename(path)=CSDN
+
+
+python中，用set来表示一个无序不重复元素的序列。set的只要作用就是用来给数据去重。 
+
+print(sorted(listC, key=lambda x: x[1]))
+#[('l', 1), ('o', 2), ('v', 3), ('e', 4), ('!', 5)]
+可以使用reverse=True参数实现倒序排列
+
+平均倒数排名是一种统计度量，用于评估任何过程，该过程会生成对查询样本的可能响应列表，并按正确概率排序。查询响应的倒数排名是第一个正确答案排名的乘法倒数：第一名为 1，第二名为1 ⁄ 2 ，第三名为1 ⁄ 3，依此类推。平均倒数排名是查询样本 Q
+
+
+
+numpy.atleast_1d(*arys)：将输入转换为维度至少为1的数组。如果输入为标量，则会被转换为一维数组，而更高维度的输入则保持不变
+
+2. lstrip() 和 rstrip() 
+这两个函数和上面的strip()基本是一样的，参数结构也一样，只不过一个是去掉左边的(头部)，一个是去掉右边的(尾部)
+a=" zhangkang "
+print(a.lstrip(),len(a.lstrip()))
+print(a.rstrip(),len(a.rstrip()))
+ 
+输出：
+('zhangkang ', 10)
+(' zhangkang', 10)
+
+
+
+startsWith() 方法用于检测字符串是否以指定的子字符串开始。
+如果是以指定的子字符串开头返回 true，否则 false。
+startsWith() 方法对大小写敏感。
+var str = "Hello world";
+var n = str.startsWith("Hello");
+console.log(n) // true
+[3:]  first 3 characters of a line
+
